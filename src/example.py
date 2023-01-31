@@ -1,5 +1,5 @@
 from time import sleep
-import xpc
+import xpc as xpc
 
 def ex():
     print("X-Plane Connect example script")
