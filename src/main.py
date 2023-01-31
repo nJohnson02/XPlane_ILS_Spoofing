@@ -15,23 +15,19 @@ def ex():
             print("Exiting...")
             return
 
-        #Show a message
-        client.sendTEXT("Gear up!")
+        #Define relevant datarefs
+        nav_override = "sim/operation/override/override_navneedles"
+        nav1_gs_l = "sim/cockpit/radios/nav1_vdef_dot"
+        nav1_gs_r = "sim/cockpit/radios/nav1_vdef_dot2"
+        nav2_gs_l = "sim/cockpit/radios/nav2_vdef_dot"
+        nav2_gs_r = "sim/cockpit/radios/nav2_vdef_dot2"
 
-        # Stow landing gear using a dataref
-        print("Stowing gear")
-        gear_dref = "sim/cockpit/switches/gear_handle_status"
-        client.sendDREF(gear_dref, 0)
+        #Add deviation
+        while True:
+            client.sendDREF(nav1_gs_l, client.getDREF(nav1_gs_r)[0] + 1)
 
         # Let the sim run for a bit.
         sleep(4)
-
-        # Make sure gear was stowed successfully
-        gear_status = client.getDREF(gear_dref)
-        if gear_status[0] == 0:
-            print("Gear stowed")
-        else:
-            print("Error stowing gear")
 
         print("End of Python client example")
         input("Press any key to exit...")
